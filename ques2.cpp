@@ -2,21 +2,28 @@
 #define intl long long
 using namespace std;
 int main(){
-    int n;
-    cin>>n;
-    intl a[n];
-    intl s=0;
-    intl mx=0;
-    for(int i=0;i<n;i++){cin>>a[i];mx=max(mx,a[i]);s+=a[i];}
-    s=s-mx;
-    if(mx>s){
-        cout<<"NO\n";
-        return 0;
+    int t;
+    cin>>t;
+    while(t--){
+        intl n,k;
+        cin>>n>>k;
+        intl mn=INT_MAX,mx=0;
+        for(int i=0;i<n;i++){
+            intl x;
+            cin>>x;
+            mx=max(mx,x);
+            mn=min(mn,x);
+        }
+        intl ap=0;
+        intl p=max(ap,mx-k);
+        intl q=mn+k;
+        if(q<p){
+            cout<<-1<<"\n";
+        }
+        else{
+            cout<<q<<"\n";
+        }
     }
-    if((s+mx)%2==0){
-        cout<<"YES\n";
-    }
-    else{
-        cout<<"NO\n";
-    }
+
+
 }

@@ -2,25 +2,50 @@
 #define intl long long
 using namespace std;
 int main(){
-    int n,m;
-    cin>>n>>m;
-    int a[m][5];
-    memset(a,0,sizeof(a));
-    int b[m];
-    memset(b,0,sizeof(a));
-    for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-            char c;
-            cin>>c;
-            a[j][c-'A']++;
-            b[j]=max(a[j][c-'A'],b[j]);
+    intl t;
+    cin>>t;
+    while(t--){
+        intl k,n,a,b;
+        cin>>k>>n>>a>>b;
+        if(a<=b){
+            if(a*n<k){
+                cout<<n<<"\n";
+            }
+            else{
+                cout<<-1<<"\n";
+            }
+            continue;
         }
+        if(double(double(k%a)/b+double(k)/a)>n){
+            cout<<min(n,(k/a))<<"\n";
+            continue;
+        }
+        intl x=(double(b*n)-double(k))/(b-a);
+        intl y=(double(a*n)-double(k))/(a-b);
+        if(y<0){
+            x+=y;
+        }
+        if(a*x+(n-x)*b==k){
+            if(x>0){
+                if(a>b)
+                cout<<min(x-1,n)<<"\n";
+            }
+            else
+                cout<<-1<<"\n";
+        }
+        else{
+            if(a*x>=k){
+                cout<<min((n),(k/a))<<"\n";
+            }
+            else if(x<0){
+                cout<<-1<<"\n";
+            }
+            else{
+                cout<<min(n,x)<<"\n";
+            }
+        }
+
     }
- //   for(int i=0;i<m;i++)cout<<b[i]<<" ";cout<<"\n";
-    int c[m];
-    for(int i=0;i<m;i++)cin>>c[i];
-    intl sum=0;
-    for(int i=0;i<m;i++)sum+=b[i]*c[i];
-    cout<<sum;
+
 
 }
