@@ -1,29 +1,46 @@
 #include<bits/stdc++.h>
-#define intl long long
 using namespace std;
-int main(){
-    int t;
-    cin>>t;
-    while(t--){
-        intl n,k;
-        cin>>n>>k;
-        intl mn=INT_MAX,mx=0;
-        for(int i=0;i<n;i++){
-            intl x;
-            cin>>x;
-            mx=max(mx,x);
-            mn=min(mn,x);
-        }
-        intl ap=0;
-        intl p=max(ap,mx-k);
-        intl q=mn+k;
-        if(q<p){
-            cout<<-1<<"\n";
-        }
-        else{
-            cout<<q<<"\n";
-        }
+void reduce(int a[],int i){
+    long long int s1=0;
+    for(int j=0;j<i;j++){
+        s1=s1*10+a[j];
     }
+    //cout<<s1<<" ll\n";
+    s1--;
+    i--;
+    while(s1){
+        int d=s1%10;
+        s1=s1/10;
+        a[i--]=d;
+        //cout<<d <<" p ";
+    }
+    //cout<<"\n";
+     //for(int i1=0;i1<3;i1++)cout<<a[i]<<" p ";cout<<"\n";
+}
+int main(){
+    string s;
+    cin>>s;
+    int a[s.length()];
+    long long int mx=1;
+    for(int i=0;i<s.length();i++){
+        a[i]=int(s[i])-48;
+        mx=mx*a[i];
+    }
+
+    for(int i=s.length()-1;i>=1;i--){
+        if(a[i]!=9){
+            a[i]=9;
+            reduce(a,i);
+        }
+
+        long long int p=1;
+        for(int k=0;k<s.length();k++){
+            p=p*a[k];
+        }
+        mx=max(p,mx);
+    }
+
+    cout<<mx<<"\n";
 
 
 }

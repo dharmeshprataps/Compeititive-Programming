@@ -1,9 +1,10 @@
 #include<bits/stdc++.h>
 using namespace std;
-int main() {
-int arr[10];
-memset(arr,1,sizeof(arr));
-for(int i = 0; i< 10; i++) {
-    cout<<arr[i]<<" ";
-}
+int main(){
+
+    float d=9;
+    double p=d/10000000000;
+    cout<<p;
+
+
 }

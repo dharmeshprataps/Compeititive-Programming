@@ -1,30 +1,14 @@
 #include<bits/stdc++.h>
 using namespace std;
 int main(){
-    int n,a,x,b,y;
-    cin>>n>>a>>x>>b>>y;
-    int f=1;
-    while(true){
-        if(a==b){
-            f=0;
-            cout<<"YES\n";
-            break;
-        }
-        if(a==x || y==b){
-            break;
-        }
-        a++;
-        b--;
-        if(a==n+1)
-            a=1;
-        if(b==0)
-            b=n;
-
+    int n;
+    cin>>n;
+    int dp[1000];
+    dp[1]=1;
+    dp[2]=5;
+    dp[3]=13;
+    for(int i=4;i<105;i++){
+        dp[i]=dp[i-1]+4*(i-1);
     }
-
-    if(f){
-        cout<<"NO\n";
-
-    }
-
+    cout<<dp[n]<<"\n";
 }

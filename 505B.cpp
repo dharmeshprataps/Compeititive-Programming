@@ -1,42 +1,49 @@
 #include<bits/stdc++.h>
 using namespace std;
-vector<int>v[110][110];
-int n;
-int dfs(int i,int visi[],int n1,int n2){
-  //  cout<<i<<" "<<n1<<" "<<n2<<"\n";
-    if(n1==n2)
-        return 1;
-    if(visi[n1])
-        return 0;
-    visi[n1]=1;
-    int s=0;
-    for(int j=0;j<v[i][n1].size();j++){
-         s=s||dfs(i,visi,v[i][n1][j],n2);
+bool dfs(vector<int>v[],int a,int b,int visi[]){
+    //cout<<a<<"\n";
+    visi[a]=1;
+    for(int i=0;i<v[a].size();i++){
+        if(visi[v[a][i]]){
+            //cout<<a<<" sad "<<v[a][i]<<"\n";
+            continue;
+        }
+        if(v[a][i]==b){
+            //cout<<"Hurray "<<a <<" "<<b<<"\n";
+            return true;
+        }
+        if(dfs(v,v[a][i],b,visi))
+            return true;
     }
-    return s;
+    visi[a]=0;
+    return false;
 }
 int main(){
     int n,m;
     cin>>n>>m;
-    //vector<int>v[m+1][n+1];
+    vector<int>v[m+1][n+1];
     for(int i=0;i<m;i++){
         int a,b,c;
         cin>>a>>b>>c;
-        v[c][a].push_back(b);
         v[c][b].push_back(a);
+        v[c][a].push_back(b);
     }
     int q;
     cin>>q;
     while(q--){
-        int b,c;
-        cin>>b>>c;
-        int s=0;
-
-        for(int i=1;i<m+1;i++){
+        int a,b;
+        cin>>a>>b;
+        int c=0;
+        for(int i=0;i<=m;i++){
+          //  cout<<i<<" i "<<"\n";
             int visi[n+1]={0};
-            s+=dfs( i,visi,b,c);
-    //        cout<<"pppppppppppp\n";
+            if(dfs(v[i],a,b,visi)){
+                c++;
+            }
         }
-        cout<<s<<"\n";
+        cout<<c<<"\n";
     }
+
+
+
 }

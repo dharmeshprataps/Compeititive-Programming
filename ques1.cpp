@@ -1,34 +1,18 @@
 #include<bits/stdc++.h>
-# define intl long long
 using namespace std;
 int main(){
-    string s;
-    cin>>s;
-    intl c=0;
-    for(int i=0;i<s.length();i++){
-        c+=(s[i]-'0');
+    long int n;
+    cin>>n;
+    long int a[n];
+    long int fr=0;
+    long int fl=0;
+    for(long int i=0;i<n;i++)cin>>a[i];
+    for(long int i=n-1;i>=0;i--){
+        if(a[i]==0)
+            fr=max(fr,i);
+        else if(a[i]==1)
+            fl=max(fl,i);
     }
-    if(c%4==0){
-        cout<<s<<"\n";
-    }
-    else{
-        int p=0;
-        for(int i=0;i<s.length();i++){
-            p=p*10+int(s[i]-'0');
-        }
-        p++;
-        int c=-1;
-        while(c%4!=0){
-            c=0;
-            p++;
-            //cout<<p<<"\n";
-            intl p1=p;
-            while(p){
-                c+=p%10;
-                p=p/10;
-            }
-            p=p1;
-        }
-        cout<<p<<"\n";
-    }
+    cout<<min(fl,fr)+1<<"\n";
+
 }
